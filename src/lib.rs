@@ -44,7 +44,7 @@ pub trait Node<S, Payload> {
 pub fn main_loop<S, N, P>(init_state: S) -> anyhow::Result<()>
 where
     N: Node<S, P>,
-    P: DeserializeOwned, // could be changed to de::DeserializeOwned
+    P: DeserializeOwned
 {
     let stdin = std::io::stdin().lock();
     let mut input_lines = stdin.lines();
