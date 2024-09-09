@@ -14,7 +14,7 @@ enum Payload {
 }
 
 struct GenerateNode {
-    node: String,
+    name: String,
     id: i32,
 }
 
@@ -23,7 +23,7 @@ impl Node<(), Payload> for GenerateNode {
         where
             Self: Sized {
         Ok(GenerateNode {
-            node: init.node_id,
+            name: init.node_id,
             id: 1
         })
     }
@@ -37,7 +37,7 @@ impl Node<(), Payload> for GenerateNode {
                     body: MessageBody {
                         msg_id: Some(self.id),
                         in_reply_to: input.body.msg_id,
-                        payload: Payload::GenerateOk { id: format!("{}-{}", self.node, self.id) }
+                        payload: Payload::GenerateOk { id: format!("{}-{}", self.name, self.id) }
                     }
                 };
                 serde_json::to_writer(&mut *output, &response)
